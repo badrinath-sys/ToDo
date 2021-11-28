@@ -24,13 +24,11 @@ class StudentController extends Controller
     function store(Request $request)
     {
         student::create([
-            "firstname"=>$request->firstname,
-            "lastname"=>$request->lastname,
-            "email"=>$request->email,
-            "created_at"=>now(),
+            "task"=>$request->task,
+          
 
         ]);
-        $request->session()->flash('message', 'student details added successfully');
+        $request->session()->flash('message', 'task details added successfully');
         return redirect('/');
         
     }  
@@ -45,19 +43,16 @@ class StudentController extends Controller
                  {  
         //  
        $request->validate([  
-            'firstname'=>'required',  
-            'lastname'=>'required',  
-            'email'=>'required' 
-             
+            'task'=>'required',  
+          
         ]);  
   
         $student = student::find($id);  
-        $student->firstname =  $request->get('firstname');  
-        $student->lastname = $request->get('lastname');    
-        $student->email = $request->get('email');  
+        $student->task=  $request->get('task');  
+      
         
         $student->save();  
-        $request->session()->flash('message', 'student details  updated successfully');
+        $request->session()->flash('message', 'task  updated successfully');
         return redirect("/");
                   }  
 
@@ -66,7 +61,7 @@ class StudentController extends Controller
     {  
         $student=student::find($id);  
         $student->delete();  
-        $request->session()->flash('message', 'student details  deleted successfully');
+        $request->session()->flash('message', 'task  deleted successfully');
         return redirect("/");
        
     }  
